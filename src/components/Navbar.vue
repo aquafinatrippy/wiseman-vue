@@ -1,6 +1,6 @@
 <template>
-  <div className="menu">
-    <RouterLink to="/" className="logo">
+  <div class="menu">
+    <RouterLink to="/" class="logo">
       <img src="../assets/logo.svg" alt="" />
     </RouterLink>
     <nav>

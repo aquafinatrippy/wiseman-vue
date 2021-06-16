@@ -1,30 +1,47 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div class="app">
+    <div class="sideNav"><Navbar /></div>
+    <div class="mainContent">
+      <router-view />
+    </div>
   </div>
-  <router-view/>
 </template>
 
+<script>
+import Navbar from "./components/Navbar.vue";
+
+export default {
+  components: { Navbar },
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+body {
+  font-family: Open Sans;
+  background: #3a3d57;
+  background-position-x: 0%;
+  background-position-y: 0%;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-image: none;
+  background-size: auto;
+  background-image: url(./assets/left.svg), url(./assets/right.svg);
+  background-repeat: no-repeat;
+  background-position: left bottom, right top;
+  background-size: 150px, 250px;
+  background-attachment: fixed;
 }
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.app {
+  background-color: #efefef;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 0;
+  display: flex;
+  min-height: 100%;
+}
+.mainContent {
+  padding: 0 60px;
+  position: relative;
+  flex-grow: 1;
 }
 </style>

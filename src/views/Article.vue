@@ -3,10 +3,10 @@
     <div class="loading" v-if="loading === true">
       <p>loading...</p>
     </div>
-    <div class="loaded" v-else>
-      <h1>{{ getArticleInfo?.title }}</h1>
+    <div v-else>
+      <h2>{{ getArticleInfo?.title }}</h2>
       <div class="intro">
-        {{ remHtml(getArticleInfo?.intro) }}
+        <p>{{ remHtml(getArticleInfo?.intro) }}</p>
       </div>
       <div class="imgCont">
         <img
@@ -14,9 +14,22 @@
           alt=""
         />
       </div>
-      <p>
-        {{ remHtml(getArticleInfo?.body) }}
-      </p>
+      <div class="bodytext">
+        <p>
+          {{ remHtml(getArticleInfo?.body) }}
+        </p>
+      </div>
+
+      <div class="tags">
+        <div
+          class="tag"
+          v-for="(tag, index) in getArticleInfo.tags"
+          :key="index"
+        >
+          {{ tag }}
+        </div>
+        {{ getPara() }}
+      </div>
     </div>
   </div>
 </template>
@@ -37,6 +50,15 @@ export default {
           .replace(/\]/g, "");
       }
     },
+    getPara() {
+      if (this.getArticleInfo.body) {
+        const test = this.getArticleInfo.body;
+        let x = test.split(/<\s*div[^>]*>(.*?)<\s*\/\s*div\s*>/);
+        console.log(x);
+      }
+
+      return "";
+    },
   },
   beforeMount() {
     this.getArticle();
@@ -45,7 +67,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.tags {
+  display: flex;
+  .tag {
+    margin: 0 10px;
+  }
+}
 img {
   width: 100%;
+}
+h2 {
+  font-weight: 700;
+  font-size: 48px;
+  color: #14cc76;
+  text-align: center;
+}
+p {
+  margin: 40px 0;
+}
+.intro {
+  p {
+    font-weight: 900;
+  }
+}
+.bodyText {
+  white-space: pre-line;
+  display: block;
 }
 </style>

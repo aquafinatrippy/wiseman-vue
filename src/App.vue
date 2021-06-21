@@ -46,4 +46,8 @@ body {
   position: relative;
   flex-grow: 1;
 }
+p {
+  line-height: 150%;
+  font-size: 24px;
+}
 </style>

@@ -6,8 +6,7 @@
     <nav>
       <ul>
         <li>
-          <!-- <RouterLink to="/">List</RouterLink> -->
-          <a @click="this.$router.push({ name: 'Home' })">list</a>
+          <RouterLink to="/">List</RouterLink>
         </li>
         <li>
           <RouterLink to="/article">Article</RouterLink>

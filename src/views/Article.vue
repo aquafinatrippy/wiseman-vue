@@ -1,7 +1,7 @@
 <template>
   <div class="about">
-    <div class="loading" v-if="loading === true">
-      <p>loading...</p>
+    <div class="loading" v-if="loadingStatus">
+      <LoadingSpinner></LoadingSpinner>
     </div>
     <div v-else>
       <h2>{{ getArticleInfo?.title }}</h2>
@@ -35,10 +35,14 @@
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
+import LoadingSpinner from "@/components/LoadingSpinner.vue";
 
 export default {
   name: "Article",
-  computed: { ...mapGetters(["getArticleInfo"]) },
+  computed: { ...mapGetters(["getArticleInfo", "loadingStatus"]) },
+  components: {
+    LoadingSpinner,
+  },
   methods: {
     ...mapActions(["getArticle", "loading"]),
     remHtml(str) {

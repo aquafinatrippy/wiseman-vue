@@ -1,18 +1,20 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.svg">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Table></Table>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import { mapActions } from "vuex";
+import Table from "@/components/Table";
 
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
-}
+  name: "Home",
+  methods: { ...mapActions(["getTableData"]) },
+  created() {
+    this.getTableData();
+  },
+  components: { Table },
+};
 </script>

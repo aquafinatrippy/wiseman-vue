@@ -6,11 +6,9 @@
     <h2>NIMEKIRI</h2>
     <table>
       <thead>
-        <th>EESNIMI</th>
-        <th>PEREKONNANIMI</th>
-        <th>SUGU</th>
-        <th>SÜNNIKUUPÄEV</th>
-        <th>TELEFON</th>
+        <th v-for="(header, index) in headers" :key="index" @click="sortTable(header.value)">
+          {{header.title}}
+        </th>
       </thead>
       <tbody>
         <tr
@@ -20,7 +18,7 @@
           <td>{{ list.firstname }}</td>
           <td>{{ list.surname }}</td>
           <td>{{ list.sex }}</td>
-          <td>{{ list.date }}</td>
+          <td>{{ format_date(list.date)  }}</td>
           <td>{{ list.phone }}</td>
         </tr>
       </tbody>
@@ -33,8 +31,9 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import LoadingSpinner from "./LoadingSpinner.vue";
+import moment from 'moment'
 
 export default {
   name: "Table",
@@ -43,11 +42,18 @@ export default {
       pagStart: 0,
       pagEnd: 10,
       active: 1,
+      headers: [{title: "EESNIMI", value: "firstname"}, {title: "PEREKONNANIMI", value: "surname"},{title: "SUGU", value: "sex"}, {title: "SÜNNIKUUPÄEV", value: "sex"},{title: "TELEFON", value: "date"} ]
     };
   },
   computed: { ...mapGetters(["getList", "loadingStatus"]) },
   components: { LoadingSpinner },
   methods: {
+    ...mapMutations(['sortTable']),
+    format_date(value){
+         if (value) {
+           return moment(value).format('YYYYMMDD')
+          }
+      },
     PaginationNavigation(where) {
       if (where === "forward") {
         if (this.pagStart >= 0 && this.pagEnd > 0) {

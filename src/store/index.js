@@ -22,6 +22,19 @@ export default createStore({
     SET_LIST(state, list) {
       state.listData = list;
     },
+    sortTable(state, sortKey) {
+      const data = state.listData;
+      data.list.sort((a, b) => {
+          let compare = 0;
+          if (a[sortKey] > b[sortKey]) {
+              compare = 1;
+          } else if (b[sortKey] > a[sortKey]) {
+              compare = -1;
+          }
+          return compare;
+      });
+      state.listData = data;
+  }
   },
   actions: {
     async getTableData({ commit }) {
@@ -55,6 +68,10 @@ export default createStore({
     loadingStatus: (state) => {
       return state.loading;
     },
+    filterList: (state) => (type) => {
+      console.log(type)
+      return state.listData.filter(data => data.firstname)
+    }
   },
   modules: {},
 });
